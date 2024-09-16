@@ -1,0 +1,16 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('location') }}">
+    <label for="warehouse_name">Warehouse Name:</label>
+    <input type="text" id="warehouse_name" name="warehouse_name" required>
+    <button type="submit">Add Warehouse</button>
+</form>
+
+<h2>Warehouse List</h2>
+<ul>
+    {% for warehouse in warehouses %}
+        <li>{{ warehouse[1] }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

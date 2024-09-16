@@ -1,0 +1,43 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+<h2>Move Product</h2>
+<form method="POST" action="{{ url_for('movement') }}">
+    <label for="prod_name">Product Name:</label>
+    <select id="prod_name" name="prod_name">
+        {% for product in products %}
+            <option value="{{ product[1] }}">{{ product[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="from_loc">From Location:</label>
+    <select id="from_loc" name="from_loc">
+        <option value="">Unallocated</option>
+        {% for location in locations %}
+            <option value="{{ location[1] }}">{{ location[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="to_loc">To Location:</label>
+    <select id="to_loc" name="to_loc">
+        <option value="">Unallocated</option>
+        {% for location in locations %}
+            <option value="{{ location[1] }}">{{ location[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" required>
+    <button type="submit">Move</button>
+</form>
+
+<h2>Logistics Summary</h2>
+<pre>{{ allocated }}</pre>
+
+<h2>Logistics Movements</h2>
+<ul>
+    {% for log in logistics %}
+        <li>Transaction ID: {{ log[0] }}, Product ID: {{ log[1] }}, From: {{ log[2] }}, To: {{ log[3] }}, Quantity: {{ log[4] }}, Time: {{ log[5] }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
